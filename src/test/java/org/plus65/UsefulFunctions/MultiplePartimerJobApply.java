@@ -69,15 +69,13 @@ public class MultiplePartimerJobApply  extends TestBaseSetup{
   
   @BeforeClass
   public void setUp() {
-	RestAssured.config = config().logConfig(LogConfig.logConfig().enablePrettyPrinting(true)).sslConfig(SSLConfig.sslConfig().relaxedHTTPSValidation());
-	RestAssured.useRelaxedHTTPSValidation();
     RestAssured.baseURI = "https://staging-api.arrowmepro.com";
   }
 	
 	@Test
 	public void applyJobs() throws FileNotFoundException {
 		
-		 for (int i = 0; i <= 30; i++) {
+		 for (int i = 0; i <= 29; i++) {
 			 String partTimerEmail = partimerEmailList[i];
 			 System.out.println("Beginning to Apply for job created by:  for Partimer: " +(i + 1));
 		
@@ -89,7 +87,7 @@ public class MultiplePartimerJobApply  extends TestBaseSetup{
 		
 		TestLogger.logStep("Bearer Token = " + bearerCode);
 
-		TestLogger.logStep("Post /ptt/v1/job/all/2061/apply");
+		TestLogger.logStep("Post /ptt/v1/job/all/2063/apply");
 		given().config(TestLogger.logConfig()).contentType("application/json")
 				.accept("application/json").header("Authorization", "Bearer " + this.bearerCode).log().all().when()
 				.post("/ptt/v1/job/all/2063/apply").then().log().body().assertThat()
